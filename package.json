@@ -1,0 +1,25 @@
+{
+  "name": "app-webproxy",
+  "version": "0.0.1-alpha.0",
+  "description": "Devebot application webproxy layerware",
+  "homepage": "https://github.com/apporo/app-webproxy.git",
+  "author": {
+    "name": "apporo",
+    "email": "apporo@devebot.com",
+    "url": "https://github.com/apporo"
+  },
+  "main": "index.js",
+  "engines": {
+    "node": "0.10 || 0.11 || 0.12 || 4"
+  },
+  "keywords": [
+    "devebot",
+    "devebot-plugin"
+  ],
+  "peerDependencies": {
+    "devebot": "^0.1.19"
+  },
+  "dependencies": {
+    "devebot": "^0.1.19"
+  }
+}
