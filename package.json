@@ -17,9 +17,12 @@
     "devebot-plugin"
   ],
   "peerDependencies": {
+    "app-webserver": "^0.0.5",
     "devebot": "^0.1.19"
   },
   "dependencies": {
-    "devebot": "^0.1.19"
+    "app-webserver": "^0.0.5",
+    "devebot": "^0.1.19",
+    "http-proxy": "^1.13.2"
   }
 }
