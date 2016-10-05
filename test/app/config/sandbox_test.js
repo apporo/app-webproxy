@@ -11,13 +11,14 @@ module.exports = {
             rules: [
               {
                 enabled: true,
-                id: 'rule1',
+                id: 'elasticsearch-plugins',
                 source: {
-                  url: '/(.*)'
+                  url: '/tool(.*)'
                 },
                 target: {
-                  hostname: 'localhost:8080',
-                  url: '/$1'
+                  hostname: '192.168.2.244',
+                  port: 9200,
+                  url: '$1'
                 }
               }
             ]
