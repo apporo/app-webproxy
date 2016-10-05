@@ -1,7 +1,17 @@
 module.exports = {
   plugins: {
     appWebproxy: {
-      mappings: {}
+      mappings: {
+        'rule1': {
+          source: {
+            url: '/(.*)'
+          },
+          target: {
+            hostname: 'localhost:8080',
+            url: '/$1'
+          }
+        }
+      }
     }
   }
 };
