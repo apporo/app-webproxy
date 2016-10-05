@@ -1,12 +1,9 @@
 'use strict';
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'test';
-
-process.env.NODE_DEVEBOT_PROFILE = process.env.NODE_DEVEBOT_PROFILE || 'testbdd';
-process.env.NODE_DEVEBOT_SANDBOX = process.env.NODE_DEVEBOT_SANDBOX || 'test';
-
 var events = require('events');
 var util = require('util');
+
+events.EventEmitter.defaultMaxListeners = 100;
 
 var Devebot = require('devebot');
 var Promise = Devebot.require('bluebird');
@@ -16,14 +13,9 @@ var superagent = require('superagent');
 var debug = Devebot.require('debug');
 var debuglog = debug('appWebproxy:test:bdd:world');
 
-
 var app = require('../../../app/index.js');
 
-var World;
-
-events.EventEmitter.defaultMaxListeners = 100;
-
-World = function World(callback) {
+var World = function World(callback) {
   this.app = app;
 
   var configsandbox = this.app.config.sandbox.context[process.env.NODE_DEVEBOT_SANDBOX];

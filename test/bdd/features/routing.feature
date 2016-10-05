@@ -13,4 +13,3 @@ Feature: HTTP request Routing
     And the response "header" should equivalent to "response_header" object below
       | response_header |
       | {  } |
-
