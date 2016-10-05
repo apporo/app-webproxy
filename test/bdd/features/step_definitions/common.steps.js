@@ -7,7 +7,7 @@ var assert = require('chai').assert;
 var superagent = require('superagent');
 
 var debug = Devebot.require('debug');
-var debuglog = debug('datasilo:test:bdd:steps:common');
+var debuglog = debug('appWebrouter:test:bdd:steps:common');
 
 module.exports = function() {
   this.World = require('../support/world.js').World;

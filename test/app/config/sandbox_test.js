@@ -1,7 +1,6 @@
 module.exports = {
   plugins: {
-    appWebproxy: {
-      contextPath: 'webrouter',
+    appWebrouter: {
       mappings: {
         default: 'static',
         sources: [
@@ -16,7 +15,7 @@ module.exports = {
                   url: '/tool(.*)'
                 },
                 target: {
-                  hostname: '192.168.2.244',
+                  hostname: '192.168.56.56',
                   port: 9200,
                   url: '$1'
                 }

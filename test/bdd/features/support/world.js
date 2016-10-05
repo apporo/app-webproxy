@@ -11,7 +11,7 @@ var lodash = Devebot.require('lodash');
 var superagent = require('superagent');
 
 var debug = Devebot.require('debug');
-var debuglog = debug('appWebproxy:test:bdd:world');
+var debuglog = debug('appWebrouter:test:bdd:world');
 
 var app = require('../../../app/index.js');
 
