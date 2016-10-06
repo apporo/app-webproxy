@@ -1,4 +1,15 @@
 module.exports = {
+  bridges: {
+    appWebrouterMongodbWrapper: {
+      mongodb: {
+        connection_options: {
+          host: 'localhost',
+          port: 3306,
+          name: 'app-webrouter'
+        }
+      }
+    }
+  },
   plugins: {
     appWebrouter: {
       mappings: {
@@ -9,8 +20,8 @@ module.exports = {
             type: 'static',
             rules: [
               {
-                enabled: true,
                 id: 'elasticsearch-plugins',
+                enabled: true,
                 source: {
                   url: '/tool(.*)'
                 },
@@ -21,6 +32,11 @@ module.exports = {
                 }
               }
             ]
+          },
+          {
+            enabled: true,
+            type: 'mongodb',
+            collection: 'mappingrules'
           }
         ]
       }

@@ -5,6 +5,8 @@ var app = require('devebot').launchApplication({
 }, [
   '../../index.js',
   'app-webserver'
+], [
+  'devebot-co-mongodb'
 ]);
 
 if (require.main === module) app.server.start();
