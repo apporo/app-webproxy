@@ -3,8 +3,8 @@ module.exports = {
     appWebrouterMongodbWrapper: {
       mongodb: {
         connection_options: {
-          host: 'localhost',
-          port: 3306,
+          host: '192.168.56.56',
+          port: 27017,
           name: 'app-webrouter'
         }
       }
@@ -13,11 +13,11 @@ module.exports = {
   plugins: {
     appWebrouter: {
       mappings: {
-        default: 'static',
+        default: 'mongodb',
         sources: [
           {
-            enabled: true,
             type: 'static',
+            enabled: true,
             rules: [
               {
                 id: 'elasticsearch-plugins',
@@ -34,9 +34,9 @@ module.exports = {
             ]
           },
           {
-            enabled: true,
             type: 'mongodb',
-            collection: 'mappingrules'
+            enabled: true,
+            collectionName: 'mappingrules'
           }
         ]
       }

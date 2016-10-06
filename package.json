@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "app-webserver": "^0.1.5",
+    "deasync": "^0.1.8",
     "devebot": "^0.1.20",
     "devebot-co-mongodb": "^0.1.4",
     "http-proxy": "^1.13.2"
