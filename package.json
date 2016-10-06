@@ -1,8 +1,8 @@
 {
-  "name": "app-webproxy",
+  "name": "app-webrouter",
   "version": "0.1.1",
-  "description": "Devebot application webproxy layerware",
-  "homepage": "https://github.com/apporo/app-webproxy.git",
+  "description": "Devebot application webrouter layerware",
+  "homepage": "https://github.com/apporo/app-webrouter.git",
   "author": {
     "name": "apporo",
     "email": "apporo@devebot.com",
