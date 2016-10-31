@@ -1,6 +1,6 @@
 {
   "name": "app-webrouter",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Devebot application webrouter layerware",
   "homepage": "https://github.com/apporo/app-webrouter.git",
   "author": {
@@ -28,10 +28,10 @@
   },
   "dependencies": {
     "app-webserver": "^0.1.11",
-    "deasync": "^0.1.8",
     "devebot": "^0.1.23",
     "devebot-co-mongodb": "^0.1.4",
-    "http-proxy": "^1.13.2"
+    "http-proxy": "^1.13.2",
+    "syncblock": "^0.1.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
