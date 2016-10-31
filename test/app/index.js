@@ -3,10 +3,7 @@
 var app = require('devebot').launchApplication({
   appRootPath: __dirname
 }, [
-  '../../index.js',
-  'app-webserver'
-], [
-  'devebot-co-mongodb'
+  '../../index.js'
 ]);
 
 if (require.main === module) app.server.start();
