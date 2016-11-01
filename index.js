@@ -1,1 +1,4 @@
-module.exports = require('devebot').registerLayerware(__dirname, ['app-webserver'], ['devebot-co-mongodb']);
+module.exports = require('devebot').registerLayerware(__dirname, [
+  'app-confighub',
+  'app-webserver'
+], ['devebot-co-mongodb']);

@@ -1,0 +1,17 @@
+{
+  "rules": [
+    {
+      "id": "elasticsearch-plugins",
+      "enabled": true,
+      "source": {
+        "url": "/tool(.*)",
+        "methods": ["GET", "POST"]
+      },
+      "target": {
+        "hostname": "192.168.56.56",
+        "port": 9200,
+        "url": "$1"
+      }
+    }
+  ]
+}
