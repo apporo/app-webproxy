@@ -24,14 +24,12 @@
   "peerDependencies": {
     "app-confighub": "^0.1.1",
     "app-webserver": "^0.1.11",
-    "devebot": "^0.1.23",
-    "devebot-co-mongodb": "^0.1.4"
+    "devebot": "^0.1.23"
   },
   "dependencies": {
     "app-confighub": "^0.1.1",
     "app-webserver": "^0.1.11",
     "devebot": "^0.1.23",
-    "devebot-co-mongodb": "^0.1.4",
     "http-proxy": "^1.13.2",
     "syncblock": "^0.1.0"
   },
