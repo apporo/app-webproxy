@@ -5,7 +5,7 @@
       "enabled": true,
       "source": {
         "url": "/tool(.*)",
-        "methods": ["GET", "POST"]
+        "methods": ["GET", "PUT"]
       },
       "target": {
         "hostname": "192.168.56.56",
