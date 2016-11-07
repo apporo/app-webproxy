@@ -1,6 +1,6 @@
 {
   "name": "app-webrouter",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Devebot application webrouter layerware",
   "homepage": "https://github.com/apporo/app-webrouter.git",
   "author": {
@@ -22,12 +22,12 @@
     "devebot-plugin"
   ],
   "peerDependencies": {
-    "app-confighub": "^0.1.1",
+    "app-confighub": "^0.1.2",
     "app-webserver": "^0.1.13",
     "devebot": "^0.1.23"
   },
   "dependencies": {
-    "app-confighub": "^0.1.1",
+    "app-confighub": "^0.1.2",
     "app-webserver": "^0.1.13",
     "devebot": "^0.1.23",
     "http-proxy": "^1.13.2",
