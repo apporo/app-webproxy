@@ -2,6 +2,7 @@ module.exports = {
   plugins: {
     appWebrouter: {
       contextPath: '/webrouter',
-      mappings: {}
+      mappings: {},
+      printRequestInfo: false
   }
 };
