@@ -4,6 +4,11 @@ module.exports = {
       jsonStoreDir: require('path').join(__dirname, '../data/confighub')
     },
     appWebrouter: {
+      request: {
+        headers: {
+          'accept-encoding': '*;q=1,gzip=0'
+        }
+      },
       mappings: {
         sources: [
           {

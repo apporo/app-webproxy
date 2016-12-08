@@ -13,6 +13,12 @@
         "url": "$1",
         "headers": {
           "accept-encoding": "*;q=1,gzip=0"
+        },
+        "response": {
+          "headers": [{
+            "name": "content-security-policy",
+            "value": null
+          }]
         }
       }
     }
