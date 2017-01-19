@@ -4,5 +4,6 @@ module.exports = {
       contextPath: '/webrouter',
       mappings: {},
       printRequestInfo: false
+    }
   }
 };

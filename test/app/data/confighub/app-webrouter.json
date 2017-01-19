@@ -11,8 +11,17 @@
         "hostname": "192.168.56.56",
         "port": 9200,
         "url": "$1",
-        "headers": {
-          "accept-encoding": "*;q=1,gzip=0"
+        "authentication": {
+          "enabled": false,
+          "type": "basic",
+          "username": "nobody",
+          "password": "secret"
+        },
+        "request": {
+          "headers": [{
+            "name": "accept-encoding",
+            "value": "*;q=1,gzip=0"
+          }]
         },
         "response": {
           "headers": [{
