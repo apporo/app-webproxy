@@ -16,22 +16,22 @@ module.exports = {
             type: 'internal',
             rules: [
               {
-                id: 'elasticsearch-plugins',
+                id: 'rabbitmq-management',
                 enabled: true,
                 source: {
-                  url: '/tool(.*)',
-                  methods: ['GET', 'POST']
+                  url: '/(.*)',
+                  //methods: ['GET', 'POST']
                 },
                 target: {
-                  hostname: 'localhost',
-                  port: 9200,
+                  hostname: '192.168.56.56',
+                  port: 15672,
                   url: '$1'
                 }
               }
             ]
           },
           {
-            enabled: true,
+            enabled: false,
             type: 'external',
             configName: 'app-webrouter'
           }
