@@ -1,8 +1,5 @@
 module.exports = {
   plugins: {
-    appConfighub: {
-      jsonStoreDir: require('path').join(__dirname, '../data/confighub')
-    },
     appWebrouter: {
       request: {
         headers: {
@@ -10,30 +7,19 @@ module.exports = {
         }
       },
       mappings: {
-        sources: [
+        rules: [
           {
+            id: 'rabbitmq-management',
             enabled: true,
-            type: 'internal',
-            rules: [
-              {
-                id: 'rabbitmq-management',
-                enabled: true,
-                source: {
-                  url: '/(.*)',
-                  //methods: ['GET', 'POST']
-                },
-                target: {
-                  hostname: '192.168.56.56',
-                  port: 15672,
-                  url: '$1'
-                }
-              }
-            ]
-          },
-          {
-            enabled: false,
-            type: 'external',
-            configName: 'app-webrouter'
+            source: {
+              url: '/(.*)',
+              //methods: ['GET', 'POST']
+            },
+            target: {
+              hostname: '192.168.56.56',
+              port: 15672,
+              url: '$1'
+            }
           }
         ]
       }
