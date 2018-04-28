@@ -16,7 +16,7 @@ module.exports = {
               //methods: ['GET', 'POST']
             },
             target: {
-              hostname: '192.168.56.56',
+              hostname: '192.168.56.90',
               port: 15672,
               url: '$1'
             }

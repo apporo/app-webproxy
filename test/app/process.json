@@ -1,11 +1,7 @@
 {
   "apps": [{
-    "name": "app-webrouter-bdd",
+    "name": "app-webrouter-demo",
     "script": "test/app",
-    "watch": true,
-    "env": {
-      "NODE_DEVEBOT_PROFILE": "testbdd",
-      "NODE_DEVEBOT_SANDBOX": "test"
-    }
+    "watch": true
   }]
 }
