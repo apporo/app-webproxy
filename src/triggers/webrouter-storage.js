@@ -1,50 +1,50 @@
 'use strict';
 
-var Devebot = require('devebot');
-var Promise = Devebot.require('bluebird');
-var chores = Devebot.require('chores');
-var lodash = Devebot.require('lodash');
-var locks = require('locks');
-var url = require('url');
-var defaultRuleSchema = require('../utils/rule-schema');
+const Devebot = require('devebot');
+const Promise = Devebot.require('bluebird');
+const chores = Devebot.require('chores');
+const lodash = Devebot.require('lodash');
+const locks = require('locks');
+const url = require('url');
+const defaultRuleSchema = require('../utils/rule-schema');
 
-var Service = function(params) {
+function WebrouterStorage(params) {
   params = params || {};
-  var self = this;
+  let self = this;
 
-  var LX = params.loggingFactory.getLogger();
-  var LT = params.loggingFactory.getTracer();
-  var packageName = params.packageName || 'app-webrouter';
-  var blockRef = chores.getBlockRef(__filename, packageName);
+  let LX = params.loggingFactory.getLogger();
+  let LT = params.loggingFactory.getTracer();
+  let packageName = params.packageName || 'app-webrouter';
+  let blockRef = chores.getBlockRef(__filename, packageName);
 
   LX.has('silly') && LX.log('silly', LT.toMessage({
     tags: [ blockRef, 'constructor-begin' ],
     text: ' + constructor begin ...'
   }));
 
-  var pluginCfg = params.sandboxConfig;
-  var defaultRequestHeaders = lodash.get(pluginCfg, ['request', 'headers'], {
+  let pluginCfg = params.sandboxConfig;
+  let defaultRequestHeaders = lodash.get(pluginCfg, ['request', 'headers'], {
     'accept-encoding': '*;q=1,gzip=0'
   });
 
-  var mappingCfg = lodash.get(pluginCfg, ['mappings'], {});
+  let mappingCfg = lodash.get(pluginCfg, ['mappings'], {});
 
-  var ruleSchema = mappingCfg.ruleSchema || defaultRuleSchema;
+  let ruleSchema = mappingCfg.ruleSchema || defaultRuleSchema;
 
-  var declaredRuleRef = null;
-  var compiledRuleRef = null;
-  var runtimeRuleList = null;
+  let declaredRuleRef = null;
+  let compiledRuleRef = null;
+  let runtimeRuleList = null;
 
-  var transformMappingRules = function(declaredRuleRef, compiledRuleRef) {
+  let transformMappingRules = function(declaredRuleRef, compiledRuleRef) {
     compiledRuleRef = compiledRuleRef || {};
     lodash.forOwn(declaredRuleRef, function(mappingObject, mappingName) {
       LX.has('silly') && LX.log('silly', LT.add({ mappingObject }).toMessage({
         text: ' - mappingObject: ${mappingObject}'
       }));
       if (mappingObject.enabled != false) {
-        var tPort = mappingObject.target.port;
+        let tPort = mappingObject.target.port;
         tPort = (!tPort || tPort == 80 || tPort == 443) ? '' : tPort;
-        var mappingRule = { source: {}, target: {} };
+        let mappingRule = { source: {}, target: {} };
         mappingRule.source.urlPattern = new RegExp(mappingObject.source.url || '/(.*)');
         if (lodash.isArray(mappingObject.source.methods) && !lodash.isEmpty(mappingObject.source.methods)) {
           mappingRule.source.methods = lodash.map(mappingObject.source.methods, function(methodName) {
@@ -76,9 +76,9 @@ var Service = function(params) {
         }
 
         if (lodash.isObject(mappingObject.target.authentication)) {
-          var authInfo = mappingObject.target.authentication;
+          let authInfo = mappingObject.target.authentication;
           if (authInfo.enabled != false && authInfo.type === 'basic' && authInfo.username && authInfo.password) {
-            var authString = "Basic " + (new Buffer(authInfo.username + ':' + authInfo.password).toString('base64'));
+            let authString = "Basic " + (new Buffer(authInfo.username + ':' + authInfo.password).toString('base64'));
             mappingRule.target.request.headers = mappingRule.target.request.headers || {};
             mappingRule.target.request.headers['authorization'] = authString;
           }
@@ -89,9 +89,9 @@ var Service = function(params) {
     return compiledRuleRef;
   };
 
-  var transformMutex = locks.createMutex();
+  let transformMutex = locks.createMutex();
 
-  var getRules = function() {
+  let getRules = function() {
     if (declaredRuleRef && compiledRuleRef && runtimeRuleList) {
       return Promise.resolve(runtimeRuleList);
     }
@@ -135,8 +135,8 @@ var Service = function(params) {
   this.match = function(reqUrl, reqMethod) {
     if (!reqUrl) return Promise.reject({ message: 'invalid request url'});
     return getRules().then(function(runtimeRuleList) {
-      for(var i=0; i<runtimeRuleList.length; i++) {
-        var mapping = runtimeRuleList[i];
+      for(let i=0; i<runtimeRuleList.length; i++) {
+        let mapping = runtimeRuleList[i];
         if (reqUrl.match(mapping.source.urlPattern)) {
           if (!reqMethod || lodash.isEmpty(mapping.source.methods) || (mapping.source.methods.indexOf(reqMethod) >= 0)) {
             return mapping;
@@ -161,4 +161,4 @@ var Service = function(params) {
   }));
 };
 
-module.exports = Service;
+module.exports = WebrouterStorage;

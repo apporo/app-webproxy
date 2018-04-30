@@ -1,30 +1,30 @@
 'use strict';
 
-var Devebot = require('devebot');
-var Promise = Devebot.require('bluebird');
-var chores = Devebot.require('chores');
-var lodash = Devebot.require('lodash');
+const Devebot = require('devebot');
+const Promise = Devebot.require('bluebird');
+const chores = Devebot.require('chores');
+const lodash = Devebot.require('lodash');
 
-var Service = function(params) {
+function WebrouterService(params) {
   params = params || {};
-  var self = this;
+  let self = this;
 
-  var LX = params.loggingFactory.getLogger();
-  var LT = params.loggingFactory.getTracer();
-  var packageName = params.packageName || 'app-webrouter';
-  var blockRef = chores.getBlockRef(__filename, packageName);
+  let LX = params.loggingFactory.getLogger();
+  let LT = params.loggingFactory.getTracer();
+  let packageName = params.packageName || 'app-webrouter';
+  let blockRef = chores.getBlockRef(__filename, packageName);
 
   LX.has('silly') && LX.log('silly', LT.toMessage({
     tags: [ blockRef, 'constructor-begin' ],
     text: ' + constructor begin ...'
   }));
 
-  var pluginCfg = params.sandboxConfig;
-  var contextPath = pluginCfg.contextPath || '/webrouter';
-  var webweaverService = params['webweaverService'];
-  var express = webweaverService.express;
+  let pluginCfg = params.sandboxConfig;
+  let contextPath = pluginCfg.contextPath || '/webrouter';
+  let webweaverService = params['app-webweaver/webweaverService'];
+  let express = webweaverService.express;
 
-  var httpProxyRouter = params.webrouterHandler.buildRestRouter(express);
+  let httpProxyRouter = params.webrouterHandler.buildRestRouter(express);
 
   self.getHttpProxyLayer = function(path) {
     return {
@@ -46,6 +46,9 @@ var Service = function(params) {
   }));
 };
 
-Service.referenceList = [ "webrouterHandler", "webweaverService" ];
+WebrouterService.referenceList = [
+  "webrouterHandler",
+  "app-webweaver/webweaverService"
+];
 
-module.exports = Service;
+module.exports = WebrouterService;

@@ -1,46 +1,45 @@
 'use strict';
 
-var Devebot = require('devebot');
-var Promise = Devebot.require('bluebird');
-var chores = Devebot.require('chores');
-var lodash = Devebot.require('lodash');
-var pinbug = Devebot.require('pinbug');
+const Devebot = require('devebot');
+const Promise = Devebot.require('bluebird');
+const chores = Devebot.require('chores');
+const lodash = Devebot.require('lodash');
+const pinbug = Devebot.require('pinbug');
+const httpProxy = require('http-proxy');
 
-var httpProxy = require('http-proxy');
-
-var Service = function(params) {
+function WebrouterHandler(params) {
   params = params || {};
-  var self = this;
+  let self = this;
 
-  var LX = params.loggingFactory.getLogger();
-  var LT = params.loggingFactory.getTracer();
-  var packageName = params.packageName || 'app-webrouter';
-  var blockRef = chores.getBlockRef(__filename, packageName);
+  let LX = params.loggingFactory.getLogger();
+  let LT = params.loggingFactory.getTracer();
+  let packageName = params.packageName || 'app-webrouter';
+  let blockRef = chores.getBlockRef(__filename, packageName);
 
   LX.has('silly') && LX.log('silly', LT.toMessage({
     tags: [ blockRef, 'constructor-begin' ],
     text: ' + constructor begin ...'
   }));
 
-  var pluginCfg = params.sandboxConfig;
-  var proxy = httpProxy.createProxyServer({});
+  let pluginCfg = params.sandboxConfig;
+  let proxy = httpProxy.createProxyServer({});
 
   proxy.on('proxyReq', function(proxyReq, req, res, options) {
     if(lodash.isObject(req.body)) {
-      var bodyData = JSON.stringify(req.body);
+      let bodyData = JSON.stringify(req.body);
       proxyReq.setHeader('Content-Type','application/json');
       proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
       proxyReq.write(bodyData);
     }
   });
 
-  var debugx = null;
+  let debugx = null;
   self.buildRestRouter = function(express) {
-    var app = express();
+    let app = express();
 
     app.all('*', function(req, res, next) {
-      var reqUrl = req.url || '';
-      var reqMethod = req.method;
+      let reqUrl = req.url || '';
+      let reqMethod = req.method;
       params.webrouterStorage.match(reqUrl, reqMethod).then(function(mapping) {
         if (lodash.isObject(mapping)) {
           LX.has('debug') && LX.log('debug', LT.add({ mapping }).toMessage({
@@ -49,9 +48,9 @@ var Service = function(params) {
           req.url = reqUrl.replace(mapping.source.urlPattern, mapping.target.url);
 
           if (mapping.target.response && mapping.target.response.headers) {
-            var _setHeader = res.setHeader;
+            let _setHeader = res.setHeader;
             res.setHeader = function(name, value) {
-              var _name = name.toLowerCase();
+              let _name = name.toLowerCase();
               if (mapping.target.response.headers[_name]) {
                 if (mapping.target.response.headers[_name].value != null) {
                   _setHeader.apply(res, [name, mapping.target.response.headers[_name].value]);
@@ -89,6 +88,6 @@ var Service = function(params) {
   }));
 };
 
-Service.referenceList = [ "webrouterStorage" ];
+WebrouterHandler.referenceList = [ "webrouterStorage" ];
 
-module.exports = Service;
+module.exports = WebrouterHandler;
